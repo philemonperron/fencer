@@ -1,20 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import * as React from 'react'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import MatchScreen from './views/match'
+import PoolScreen from './views/pool'
+import TournamentScreen from './views/tournament'
 
-export default function App() {
+const Tab = createBottomTabNavigator()
+
+export default function App () {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused }) => {
+              switch (route.name) {
+                case 'Match':
+                  return <MaterialCommunityIcons name='sword-cross' solid={true} size={24} color={focused ? 'black' : 'gray'} />
+                case 'Pool':
+                  return <MaterialCommunityIcons name='pound-box-outline' solid={true} size={24} color={focused ? 'black' : 'gray'} />
+                case 'Tournament':
+                  return <MaterialCommunityIcons name='tournament' solid={true} size={24} color={focused ? 'black' : 'gray'} />
+              }
+            },
+            tabBarActiveTintColor: 'black',
+            tabBarInactiveTintColor: 'gray',
+            tabBarStyle:
+              {
+                height: 60,
+                paddingBottom: 10
+              }
+          }
+        )}
+      >
+        <Tab.Screen name='Match' component={MatchScreen} />
+        <Tab.Screen name='Pool' component={PoolScreen} />
+        <Tab.Screen name='Tournament' component={TournamentScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
