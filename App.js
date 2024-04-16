@@ -23,12 +23,13 @@ export default function App () {
                   return <MaterialCommunityIcons name='tournament' solid={true} size={24} color={focused ? 'black' : 'gray'} />
               }
             },
+            headerShown: false,
             tabBarActiveTintColor: 'black',
             tabBarInactiveTintColor: 'gray',
             tabBarStyle:
               {
-                height: 60,
-                paddingBottom: 10
+                height: 55,
+                paddingBottom: 7
               }
           }
         )}
